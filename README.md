@@ -1,5 +1,6 @@
 mDesktop
 ========
+[![Issues in Ready](https://badge.waffle.io/octalmage/mdesktop.png?label=ready&title=Ready)](https://waffle.io/octalmage/mdesktop) [![Issues in Progress](https://badge.waffle.io/octalmage/mdesktop.png?label=in progress&title=In Progress)](https://waffle.io/octalmage/mdesktop)
 
 mDesktop is a lightweight application that allows the user to utilize multiple virtual desktops. mDesktop currently supports up to ten virtual desktops.
 
