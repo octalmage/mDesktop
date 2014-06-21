@@ -1002,6 +1002,7 @@ SwitchToDesktop(newDesktop)
 		{
 			return
 		}
+		
 
 		Loop %numDesktops%
 		{
@@ -1349,7 +1350,7 @@ GetCurrentWindows(index)
 	{
 		global
 		
-
+		
 		emptyString =
 		StringSplit, windows%index%, emptyString
 
@@ -1407,6 +1408,7 @@ GetCurrentWindows(index)
 			
 			
 			this_idx:= A_Index
+			
 			Loop, Parse, windowsOnAll, |,%A_Space%
 			{
 				If instr(windowTitle,a_loopfield)
@@ -1473,7 +1475,6 @@ ShowHideWindows(index, show)
 					 WinSet, Transparent, 0, ahk_id %id%
 					 
 					Win_Move(id, 0, 0, 0, 0)
-					
 					
 				}
 				Else
