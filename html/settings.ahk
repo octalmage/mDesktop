@@ -5,6 +5,8 @@ Gui ,Show , w680 h440, mDesktop
 path=file:///%A_ScriptDir%\settings.html
 WB.Navigate(path)
 
+WB.document.parentwindow.execScript("alert('Called from AHK')")
+
 return
  
 class WB_events
