@@ -1,6 +1,6 @@
 ; Initially created by Jason Stallings
 ; Updated by IamTheFij
-; Source available http://code.google.com/p/mdesktop
+; Source available https://github.com/octalmage/mDesktop
 
 
 #NoEnv
