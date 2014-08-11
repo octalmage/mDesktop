@@ -1,6 +1,6 @@
 ; Initially created by Jason Stallings
 ; Updated by IamTheFij
-; Source available http://code.google.com/p/mdesktop
+; Source available http://github.com/octalmage/mDesktop
 
 
 #NoEnv
@@ -18,6 +18,8 @@ WinClose, ahk_class SysShadow
 
 #include Win.ahk
 
+onexit , cleanup
+
 ;Set this varible here to 0 to turn the gestures off.
 gest=0
 
@@ -29,6 +31,11 @@ gest=0
 switcher=0
 ;This is the amount of pixels between each window in the switcher.
 spacing=25
+
+;Settings file location. 
+settings_location=%A_appdata%\mDesktop\
+settings_name=settings.ini
+settings=%settings_location%%settings_name%
 
 
 ;this is for the new api I'm working on.
@@ -98,43 +105,43 @@ numDesktops := 4
 gesttime:=800
 
 
+;TODO: Add code to import settings from swipe.ini. 
 
-onexit , cleanup
-If !fileexist("swipe.ini")
+;Create directory for settings if it doesn't exist. 
+if !fileexist(settings_location)
 {
-	IniWrite , !^m, swipe.ini, Settings, unhide
-	IniWrite , ^#RIGHT, swipe.ini, Settings, switchnext
-	IniWrite , ^#LEFT, swipe.ini, Settings, switchprev
-	IniWrite , 4, swipe.ini, Settings, numdesks
-	IniWrite , !, swipe.ini, Settings, switchMod
-	IniWrite , ^!, swipe.ini, Settings, sendmod
-	IniWrite , 0, swipe.ini, Settings, crash
-	IniWrite , %a_space%, swipe.ini, Settings, windowsOnAll
-	IniWrite , 1, swipe.ini, Settings, desktopcircle
-	
-	
-	
-	
-	
-
+	FileCreateDir, %settings_location% 
 }
 
-IniRead , unhidehotkey, swipe.ini, settings, unhide, !^s
-IniRead , nexthotkey, swipe.ini, settings, switchnext, ^#RIGHT
-IniRead , prevhotkey, swipe.ini, settings, switchprev, ^#LEFT
-IniRead , numDesktops, swipe.ini, Settings, numdesks, 4
-IniRead , switchModifier, swipe.ini, Settings, switchmod, !
-IniRead , sendModifier, swipe.ini, Settings, sendmod, ^!
-IniRead , crash, swipe.ini, Settings, crash
-IniRead , windowsOnAll, swipe.ini, Settings, windowsOnAll
-IniRead , desktopcircle, swipe.ini, Settings, desktopcircle
+If !fileexist(settings)
+{
+	IniWrite , !^m, %settings%, Settings, unhide
+	IniWrite , ^#RIGHT, %settings%, Settings, switchnext
+	IniWrite , ^#LEFT, %settings%, Settings, switchprev
+	IniWrite , 4, %settings%, Settings, numdesks
+	IniWrite , !, %settings%, Settings, switchMod
+	IniWrite , ^!, %settings%, Settings, sendmod
+	IniWrite , 0, %settings%, Settings, crash
+	IniWrite , %a_space%, %settings%, Settings, windowsOnAll
+	IniWrite , 1, %settings%, Settings, desktopcircle
+}
+
+IniRead , unhidehotkey, %settings%, Settings, unhide, !^s
+IniRead , nexthotkey, %settings%, Settings, switchnext, ^#RIGHT
+IniRead , prevhotkey, %settings%, Settings, switchprev, ^#LEFT
+IniRead , numDesktops, %settings%, Settings, numdesks, 4
+IniRead , switchModifier, %settings%, Settings, switchmod, !
+IniRead , sendModifier, %settings%, Settings, sendmod, ^!
+IniRead , crash, %settings%, Settings, crash
+IniRead , windowsOnAll, %settings%, Settings, windowsOnAll
+IniRead , desktopcircle, %settings%, Settings, desktopcircle
 
 
-IniRead , theswitchmod, swipe.ini, Settings, theswitchmod,1
-IniRead , thesendmod, swipe.ini, Settings, thesendmod,1
-IniRead , thenextmod, swipe.ini, Settings, thenextmod,1
-IniRead , thepremod, swipe.ini, Settings, thepremod,1
-IniRead , rightaltkey, swipe.ini, Settings, rightaltkey,1
+IniRead , theswitchmod, %settings%, Settings, theswitchmod,1
+IniRead , thesendmod, %settings%, Settings, thesendmod,1
+IniRead , thenextmod, %settings%, Settings, thenextmod,1
+IniRead , thepremod, %settings%, Settings, thepremod,1
+IniRead , rightaltkey, %settings%, Settings, rightaltkey,1
 
 
 SysGet, VirtualScreenWidth, 78
@@ -174,13 +181,13 @@ Loop, %backup%
 	fileappend,%id%|, crash.dat
 }
 FileSetAttrib, +h , crash.dat
-IniWrite , 1, swipe.ini, Settings, crash
+IniWrite , 1, %settings%, Settings, crash
 crash=1
 
-IniRead , runatstartup, swipe.ini, Settings, runatstartup, 0
+IniRead , runatstartup, %settings%, Settings, runatstartup, 0
 Loop %numDesktops%
 {
-	IniRead , desktop%A_Index%, swipe.ini, Settings, desktop%A_Index%, Desktop %A_Index%
+	IniRead , desktop%A_Index%, %settings%, Settings, desktop%A_Index%, Desktop %A_Index%
 }
 
 Hotkey , %unhidehotkey% , unhide
@@ -412,7 +419,7 @@ usercanhazaccess(desk)
 		If islocked(desk)
 		{
 			InputBox, password, This desktop is locked, Please enter your password:, HIDE, , , , , , 5
-			iniread, dpassword, swipe.ini, Settings, passhex
+			iniread, dpassword, %settings%, Settings, passhex
 			If not Password{
 				return 0
 			}
@@ -439,7 +446,7 @@ usercanhazaccess(desk)
 
 islocked(desk)
 	{
-		IniRead, locked, swipe.ini, Settings, locked%desk%, 0
+		IniRead, locked, %settings%, Settings, locked%desk%, 0
 
 		return 	locked
 	}
@@ -744,7 +751,7 @@ savesettings:
 	StringTrimRight, windowsonall, windowsonall, 1
 
 
-	IniWrite , %windowsonall%, swipe.ini, Settings, windowsOnAll
+	IniWrite , %windowsonall%, %settings%, Settings, windowsOnAll
 
 
 
@@ -752,11 +759,11 @@ savesettings:
 	gui 7: destroy
 
 
-IniWrite , %theswitchmod%, swipe.ini, settings, theswitchmod
-IniWrite , %thesendmod%, swipe.ini, settings, thesendmod
-IniWrite , %thenextmod%, swipe.ini, settings, thenextmod
-IniWrite , %thepremod%, swipe.ini, settings, thepremod
-IniWrite , %rightaltkey%, swipe.ini, settings, rightaltkey
+IniWrite , %theswitchmod%, %settings%, settings, theswitchmod
+IniWrite , %thesendmod%, %settings%, settings, thesendmod
+IniWrite , %thenextmod%, %settings%, settings, thenextmod
+IniWrite , %thepremod%, %settings%, settings, thepremod
+IniWrite , %rightaltkey%, %settings%, settings, rightaltkey
 
 
 if (thenextmod=1)
@@ -820,7 +827,7 @@ If newSwitchModifier != %switchModifier%
 	
 
 	switchModifier := newSwitchModifier
-	IniWrite , %switchModifier%, swipe.ini, Settings, switchmod
+	IniWrite , %switchModifier%, %settings%, Settings, switchmod
 }
 
 
@@ -842,7 +849,7 @@ else if (thesendmod=3)
 	If newSendModifier != %SendModifier%
 	{
 		sendModifier := newSendModifier
-		IniWrite , %sendModifier%, swipe.ini, Settings, sendmod
+		IniWrite , %sendModifier%, %settings%, Settings, sendmod
 	}
 
 	; Save unhide hotkey
@@ -851,7 +858,7 @@ else if (thesendmod=3)
 		Hotkey , %newunhidehotkey% , unhide
 		Hotkey , %newunhidehotkey% , off
 		unhidehotkey= %newunhidehotkey%
-		IniWrite , %unhidehotkey%, swipe.ini, settings, unhide
+		IniWrite , %unhidehotkey%, %settings%, settings, unhide
 	}
 
 	; Rename desktops
@@ -863,7 +870,7 @@ else if (thesendmod=3)
 		{
 			menu , tray, rename,  %oldDesktop%, %newDesktop%
 			desktop%A_Index% := newDesktop
-			IniWrite , %newDesktop%, swipe.ini, Settings, desktop%A_Index%
+			IniWrite , %newDesktop%, %settings%, Settings, desktop%A_Index%
 		}
 	}
 
@@ -887,7 +894,7 @@ else if (thesendmod=3)
 			}
 		}
 		numDesktops = %newnumdesktops%
-		IniWrite , %numDesktops%, swipe.ini, Settings , numdesks
+		IniWrite , %numDesktops%, %settings%, Settings , numdesks
 		
 	
 		
@@ -902,14 +909,14 @@ else if (thesendmod=3)
 		
 		nexthotkey = %newnexthotkey%
 		Hotkey , %nexthotkey% , snext
-		IniWrite , %nexthotkey%, swipe.ini, settings, switchnext
+		IniWrite , %nexthotkey%, %settings%, settings, switchnext
 	}
 
 	If newprevhotkey!=%prevhotkey%
 	{
 		prevhotkey = %newprevhotkey%
 		Hotkey , %prevhotkey% , sprev
-		IniWrite , %prevhotkey%, swipe.ini, settings, switchprev
+		IniWrite , %prevhotkey%, %settings%, settings, switchprev
 	}
 
 
@@ -922,8 +929,8 @@ else if (thesendmod=3)
 	{
 		RegDelete, HKCU,Software\Microsoft\Windows\CurrentVersion\Run,mDesktop
 	}
-	iniwrite, %runatstartup%, swipe.ini, Settings, runatstartup
-	iniwrite, %desktopcircle%, swipe.ini, Settings, desktopcircle
+	iniwrite, %runatstartup%, %settings%, Settings, runatstartup
+	iniwrite, %desktopcircle%, %settings%, Settings, desktopcircle
 
 
 
@@ -1589,8 +1596,8 @@ change:
 return
 
 CleanUp:
-	;IniWrite , %hidinglevel%, swipe.ini, Settings, level
-	IniWrite , 0, swipe.ini, Settings, crash
+	;IniWrite , %hidinglevel%, %settings%, Settings, level
+	IniWrite , 0, %settings%, Settings, crash
 	filedelete, crash.dat
 	Loop , %numDesktops%
 	{
@@ -1599,19 +1606,19 @@ CleanUp:
 			logiconset:=deskicon%a_index%
 			logiconsetname=deskicon%a_index%
 			logiconset:=inize(logiconset)
-			IniWrite , %logiconset%, swipe.ini, Settings, %logiconsetname%
+			IniWrite , %logiconset%, %settings%, Settings, %logiconsetname%
 			logdeskshow:=deskshow%a_index%
 			logdeskshowname=deskshow%a_index%
-			IniWrite , %logdeskshow%, swipe.ini, Settings, %logdeskshowname%
+			IniWrite , %logdeskshow%, %settings%, Settings, %logdeskshowname%
 			logtaskshow:=taskshow%a_index%
 			logtaskshowname=taskshow%a_index%
-			IniWrite , %logtaskshow%, swipe.ini, Settings, %logtaskshowname%
+			IniWrite , %logtaskshow%, %settings%, Settings, %logtaskshowname%
 			logautohidetask:=autohidetask%a_index%
 			logautohidetaskname=autohidetask%a_index%
-			IniWrite , %logautohidetask%, swipe.ini, Settings, %logautohidetaskname%
+			IniWrite , %logautohidetask%, %settings%, Settings, %logautohidetaskname%
 			logrecshow:=recshow%a_index%
 			logrecshowname=recshow%a_index%
-			IniWrite , %logrecshow%, swipe.ini, Settings, %logrecshowname%
+			IniWrite , %logrecshow%, %settings%, Settings, %logrecshowname%
 			
 			
 		}
@@ -1624,13 +1631,13 @@ about:
 	gui 2:add,text,,mDesktop
 	gui 2:add,text,,Version: 1.6 Beta 4
 	gui 2:add,text,,By: Jason Stallings
-	gui 2:add,text,cblue ggourl,code.google.com/p/mdesktop/
+	gui 2:add,text,cblue ggourl, github.com/octalmage/mDesktop
 	gui 2:add,text,,Enhancements by: Ian Fijolek
 	gui 2:show
 return
 
 gourl:
-	run http://code.google.com/p/mdesktop/
+	run http://github.com/octalmage/mdesktop
 return
 
 ShowBanner(Text)
