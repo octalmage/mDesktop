@@ -1,4 +1,4 @@
-![](https://cloudup.com/c51ObcRcTOO+)
+![](https://cloudup.com/c9IqLZu0HNA+)
 
 mDesktop is a lightweight application that allows the user to utilize multiple virtual desktops. mDesktop currently supports up to ten virtual desktops.
 
