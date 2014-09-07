@@ -39,7 +39,7 @@ settings=%settings_location%%settings_name%
 
 
 ;this is for the new api I'm working on.
-api=0
+api=1
 
 /*
 
