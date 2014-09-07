@@ -1,8 +1,6 @@
 ![](https://cloudup.com/c9IqLZu0HNA+)
 
-mDesktop is a lightweight application that allows the user to utilize multiple virtual desktops. mDesktop currently supports up to ten virtual desktops.
-
-Instructions:
+#Instructions#
 
 Holding Alt-Desktop Index (e.g. Alt-1, Alt-2...) switches between desktops
 
