@@ -1366,7 +1366,6 @@ GetCurrentWindows(index)
 		{
 			id := % windows%index%%A_Index%
 			
-			fileappend, %id%`n, test.txt
 			win_desktop%id%:=index
 			
 		   
