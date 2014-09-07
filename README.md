@@ -15,4 +15,4 @@ Right Clicking on tray icon and selecting option "Hide Icon" hides the mDesktop 
 
 [![Issues in Ready](https://badge.waffle.io/octalmage/mdesktop.png?label=ready&title=Ready)](https://waffle.io/octalmage/mdesktop) [![Issues in Progress](https://badge.waffle.io/octalmage/mdesktop.png?label=in progress&title=In Progress)](https://waffle.io/octalmage/mdesktop) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=1897034)](https://www.bountysource.com/trackers/1897034-mdesktop?utm_source=1897034&utm_medium=shield&utm_campaign=TRACKER_BADGE) [![Gitter chat](https://badges.gitter.im/octalmage/mDesktop.png)](https://gitter.im/octalmage/mDesktop)
 
-[Old Google Code Repository](https://code.google.com/p/mdesktop/)
+[Google Code](https://code.google.com/p/mdesktop/)
