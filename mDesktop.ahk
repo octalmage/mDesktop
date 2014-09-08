@@ -121,7 +121,6 @@ If !fileexist(settings)
 	IniWrite , 4, %settings%, Settings, numdesks
 	IniWrite , !, %settings%, Settings, switchMod
 	IniWrite , ^!, %settings%, Settings, sendmod
-	IniWrite , 0, %settings%, Settings, crash
 	IniWrite , %a_space%, %settings%, Settings, windowsOnAll
 	IniWrite , 1, %settings%, Settings, desktopcircle
 }
@@ -132,7 +131,6 @@ IniRead , prevhotkey, %settings%, Settings, switchprev, ^#LEFT
 IniRead , numDesktops, %settings%, Settings, numdesks, 4
 IniRead , switchModifier, %settings%, Settings, switchmod, !
 IniRead , sendModifier, %settings%, Settings, sendmod, ^!
-IniRead , crash, %settings%, Settings, crash
 IniRead , windowsOnAll, %settings%, Settings, windowsOnAll
 IniRead , desktopcircle, %settings%, Settings, desktopcircle
 
@@ -148,41 +146,6 @@ SysGet, VirtualScreenWidth, 78
 SysGet, VirtualScreenHeight, 79
 SysGet, MonitorCount, MonitorCount
 
-
-
-
-
-If crash
-{
-	MsgBox, 4, , mDesktop crashed. Would you like to restore lost windows?
-
-	IfMsgBox yes
-	{
-		FileRead, oldwindows, crash.dat
-		Loop, Parse, oldwindows, |
-		{
-			winshow, ahk_id %A_LoopField%
-		}
-	}
-
-}
-
-
-
-
-
-filedelete, crash.dat
-
-WinGet , backup, List,,, Program Manager
-
-Loop, %backup%
-{
-	id := backup%A_Index%
-	fileappend,%id%|, crash.dat
-}
-FileSetAttrib, +h , crash.dat
-IniWrite , 1, %settings%, Settings, crash
-crash=1
 
 IniRead , runatstartup, %settings%, Settings, runatstartup, 0
 Loop %numDesktops%
@@ -1596,8 +1559,6 @@ return
 
 CleanUp:
 	;IniWrite , %hidinglevel%, %settings%, Settings, level
-	IniWrite , 0, %settings%, Settings, crash
-	filedelete, crash.dat
 	Loop , %numDesktops%
 	{
 		if desktopswitcher
@@ -1628,7 +1589,7 @@ CleanUp:
 
 about:
 	gui 2:add,text,,mDesktop
-	gui 2:add,text,,Version: 1.7.0
+	gui 2:add,text,,Version: 1.7.2
 	gui 2:add,text,,By: Jason Stallings
 	gui 2:add,text,cblue ggourl, github.com/octalmage/mDesktop
 	gui 2:add,text,,Enhancements by: Ian Fijolek

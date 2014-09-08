@@ -37,7 +37,7 @@ RequestExecutionLevel admin
 
   ;Name and file
   Name "mDesktop"
-  OutFile "mDesktopSetup1.7.0.exe"
+  OutFile "mDesktopSetup1.7.2.exe"
 
   ;Default installation folder
   InstallDir "$PROGRAMFILES\mDesktop"
@@ -119,7 +119,7 @@ SetOutPath "$INSTDIR\icons"
   File "icons\10.ico"
   ;Store installation folder
 	WriteRegStr HKCU "Software\mDesktop" "" $INSTDIR
-	WriteRegStr HKCU "Software\mDesktop" "version" "1.7.0"
+	WriteRegStr HKCU "Software\mDesktop" "version" "1.7.2"
   
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
