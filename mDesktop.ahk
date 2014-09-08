@@ -1,5 +1,5 @@
-; Initially created by Jason Stallings
-; Updated by IamTheFij
+; Author: Jason Stallings
+; Contributors: IamTheFij
 ; Source available http://github.com/octalmage/mDesktop
 
 
@@ -1628,7 +1628,7 @@ CleanUp:
 
 about:
 	gui 2:add,text,,mDesktop
-	gui 2:add,text,,Version: 1.6 Beta 4
+	gui 2:add,text,,Version: 1.7.0
 	gui 2:add,text,,By: Jason Stallings
 	gui 2:add,text,cblue ggourl, github.com/octalmage/mDesktop
 	gui 2:add,text,,Enhancements by: Ian Fijolek
