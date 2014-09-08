@@ -14,4 +14,4 @@ mDesktop has a 300-400KB memory footprint, making it the most lightweight option
 
 [![Issues in Ready](https://badge.waffle.io/octalmage/mdesktop.png?label=ready&title=Ready)](https://waffle.io/octalmage/mdesktop) [![Issues in Progress](https://badge.waffle.io/octalmage/mdesktop.png?label=in progress&title=In Progress)](https://waffle.io/octalmage/mdesktop) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=1897034)](https://www.bountysource.com/trackers/1897034-mdesktop?utm_source=1897034&utm_medium=shield&utm_campaign=TRACKER_BADGE) [![Gitter chat](https://badges.gitter.im/octalmage/mDesktop.png)](https://gitter.im/octalmage/mDesktop) [![Build status](https://ci.appveyor.com/api/projects/status/yqds3xmd86b5jtyp)](https://ci.appveyor.com/project/octalmage/mdesktop)
 
-[Nightly Builds](getmdesktop.com/build) | [Google Code](https://code.google.com/p/mdesktop/source/list)
+[Nightly Builds](http://getmdesktop.com/build) | [Google Code](https://code.google.com/p/mdesktop/source/list)
