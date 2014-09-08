@@ -31,7 +31,7 @@ build: off
 #---------------------------------#
 test_script:
  - ps: $status = Get-Content "status.txt"
- - ps: Add-AppveyorCompilationMessage $status -Category Information -FileName "Ahk2Exe.exe"
+ - ps: Add-AppveyorCompilationMessage "$status" -Category Information -FileName "Ahk2Exe.exe"
  - ps: if ("Successfully compiled: mDesktop.exe" -like $status)
  - ps: { 
  - ps:     $zip="mDesktop.$env:APPVEYOR_BUILD_VERSION.zip"
