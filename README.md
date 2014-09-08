@@ -1,4 +1,4 @@
-![](https://cloudup.com/c9IqLZu0HNA+)
+[![](https://cloudup.com/c9IqLZu0HNA+)](http://getmdesktop.com)
 
 #Instructions#
 
