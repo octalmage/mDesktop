@@ -18,4 +18,4 @@ mDesktop has a 300-400KB memory footprint, making it the most lightweight option
 
 [![](http://feeds.feedburner.com/MdesktopBlog.1.gif)](http://mdesktop.tumblr.com)
 
-- [Jason Stallings](http://jason.stallin.gs)
+[Jason Stallings](http://jason.stallin.gs)
