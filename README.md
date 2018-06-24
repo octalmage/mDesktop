@@ -1,6 +1,6 @@
 [![](https://cloudup.com/c9IqLZu0HNA+)](http://getmdesktop.com)
 
-#Instructions#
+# Instructions
 
 Holding Alt+Desktop Index (e.g. Alt+1, Alt+2...) switches between desktops.
 
